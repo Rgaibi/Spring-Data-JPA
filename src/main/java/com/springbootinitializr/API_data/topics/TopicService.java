@@ -1,5 +1,6 @@
 package com.springbootinitializr.API_data.topics;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,41 +9,51 @@ import java.util.List;
 
 @Service
 public class TopicService {
+	
+	@Autowired
+	private TopicRepository topicrepository;
 
-    private List<Topic> topics = new ArrayList<>(Arrays.asList(
+    /*private List<Topic> topics = new ArrayList<>(Arrays.asList(
             new Topic("spring", "Spring Framework", "Spring Framework Description"),
                 new Topic("java", "Core Java", "Core Java Description"),
                 new Topic("javascript", "Javascript", "Javascript Description")
 
-                ));
+                ));*/
 
     public List<Topic> getAllTopics() {
-        return topics;
+        //return topics;
+    	List<Topic> topicsFromDb =new ArrayList<>();
+    	topicrepository.findAll().forEach(topicsFromDb::add);
+    	// ou topicrepository.findAll().forEach(topic -> topicsFromDb.add(topic));
+    	return topicsFromDb;
     }
 
     public Topic getTopic(String id) {
-        return topics.stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .get();
+        //return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+    	return topicrepository.findById(id).orElse(null);
     }
 
 
     public void addTopic(Topic topic) {
-        topics.add(topic);
+        //topics.add(topic);
+    	topicrepository.save(topic);
     }
 
     public void updateTopic(String id, Topic topic) {
-        for(int i = 0; i < topics.size(); i++) {
+    	topicrepository.save(topic);
+    	
+    	
+    	/*for(int i = 0; i < topics.size(); i++) {
             Topic t = topics.get(i);
             if (t.getId().equals(id)) {
                 topics.set(i, topic);
                 return;
             }
-        }
+        }*/
     }
 
     public void deleteTopic(String id) {
-        topics.removeIf(t -> t.getId().equals(id));
+        //topics.removeIf(t -> t.getId().equals(id));
+    	topicrepository.deleteById(id);
     }
 }
