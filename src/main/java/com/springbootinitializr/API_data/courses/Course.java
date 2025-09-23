@@ -4,6 +4,7 @@ import com.springbootinitializr.API_data.topics.Topic;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Course {
@@ -12,7 +13,7 @@ public class Course {
     private String id;
     private String name;
     private String description;
-    
+    @ManyToOne
     private Topic topic;
 
 
