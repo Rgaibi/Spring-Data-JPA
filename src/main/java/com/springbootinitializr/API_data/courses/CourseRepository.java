@@ -1,9 +1,9 @@
-package com.springbootinitializr.API_data.topics;
+package com.springbootinitializr.API_data.courses;
 
 import org.springframework.data.repository.CrudRepository; 
 
 //JpaRepository Hérite de CrudRepository et ajoute des fonctionnalités spécifiques à JPA/Hibernate
-public interface TopicRepository extends CrudRepository<Topic, String> {
+public interface CourseRepository extends CrudRepository<Course, String> {
 	
 	
 
